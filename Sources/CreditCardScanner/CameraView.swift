@@ -20,13 +20,13 @@ public struct CameraView: View {
     @State private var resultMessage: String = "카드를 가이드라인 안에 맞춰주세요"
     
     /// 스캔 상태 열거형
-    private enum ScanState {
+    public enum ScanState {
         case ready
         case scanning
         case success
         case failed
         
-        var backgroundColor: Color {
+        public var backgroundColor: Color {
             switch self {
             case .ready:
                 return Color.black.opacity(0.7)
@@ -251,7 +251,7 @@ private struct CameraPreviewView: UIViewControllerRepresentable {
 private class CameraPreviewViewController: UIViewController {
     
     var onScanComplete: ((OCREngine.ScanResult) -> Void)?
-    var onScanStateChange: ((ScanState, String) -> Void)?
+    var onScanStateChange: ((PreviewScanState, String) -> Void)?
     
     private var captureSession: AVCaptureSession?
     private var previewLayer: AVCaptureVideoPreviewLayer?
@@ -260,7 +260,7 @@ private class CameraPreviewViewController: UIViewController {
     private var lastScanTime: Date = Date.distantPast
     private let scanInterval: TimeInterval = 1.0
     
-    enum ScanState {
+    enum PreviewScanState {
         case ready, scanning, success, failed
     }
     
