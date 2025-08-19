@@ -143,7 +143,7 @@ public class CreditCardScanner {
     }
     
     /// OCR 결과를 처리하여 최종 결과 생성
-    private func processScanResult(_ ocrResult: OCREngine.ScanResult, completion: @escaping ScanCompletion) {
+    internal func processScanResult(_ ocrResult: OCREngine.ScanResult, completion: @escaping ScanCompletion) {
         // 신뢰도 확인
         guard ocrResult.confidence >= configuration.confidenceThreshold else {
             completion(.failure(.lowConfidence(ocrResult.confidence)))
